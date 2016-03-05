@@ -13,6 +13,7 @@ var TimeZoneHelper = {
     'San Francisco':"Pacific Time (US & Canada)",
     'New York':"Eastern Time (US & Canada)",
     'Columbus':"Eastern Time (US & Canada)"
+    'San Diego':"Pacific Time (US & Canada)",
   }
 };
 
