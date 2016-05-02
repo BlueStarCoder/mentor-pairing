@@ -7,7 +7,7 @@
 
   <div class="profile_content_wrap right">
     <p>
-      <a href=<%= href_to_twitters_user(@user) %>><%= "@#{@user.try(:twitter_handle)}" %><%= image_tag("twitter_black_logo.jpg")%></a>
+      <a href=<%= href_to_twitters_user(@user) %>><%= display_twitter_handle(@user.twitter_handle)  %><%= image_tag("twitter_black_logo.jpg")%></a>
     </p>
 
     <% if @user.bio %>
