@@ -11,6 +11,10 @@ module ApplicationHelper
     "https://twitter.com/" + m.twitter_handle
   end
 
+  def display_twitter_handle(handle)
+    handle && ("@" + handle.sub(/^@/, ''))
+  end
+
   def month_link(symbol, month)
     link_to symbol, :month => month.strftime("%Y-%m-01")
   end

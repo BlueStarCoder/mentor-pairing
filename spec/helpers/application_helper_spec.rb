@@ -58,4 +58,18 @@ describe ApplicationHelper do
       expect(future_or_past_tense(start_time)).to eq("mentored")
     end
   end
+
+  context "#display_twitter_handle" do
+    it "returns an empty string when the user doesn't have a handle" do
+      expect(display_twitter_handle(nil)).to be_nil
+    end
+
+    it "returns the string w/ a leading arobase (at-sign?)" do
+      expect(display_twitter_handle("bob")).to eq "@bob"
+    end
+
+    it "strips extraneous symbols from the front" do
+      expect(display_twitter_handle("@bob")).to eq "@bob"
+    end
+  end
 end
