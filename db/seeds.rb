@@ -16,6 +16,7 @@ def create_availability_data
     { timezone: "Central Time (US & Canada)", city: "Chicago"},
     { timezone: "Pacific Time (US & Canada)", city: "San Francisco"},
     { timezone: "Eastern Time (US & Canada)", city: "New York"},
+    { timezone: "Pacific Time (US & Canada)", city: "Seattle"},
     { timezone: "Eastern Time (US & Canada)", city: "Columbus"}
   ]
 
