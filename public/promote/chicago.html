@@ -125,7 +125,7 @@ function chicago(availability) {
 }
 
 $.ajax({
-    url: "http://mentoring.devbootcamp.com/availabilities.json?callback=whatever",
+    url: "/availabilities.json?callback=whatever",
     jsonpCallback: "whatever",
     dataType: "jsonp"
 }).done(function(data){
