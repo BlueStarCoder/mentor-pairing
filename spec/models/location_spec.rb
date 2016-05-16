@@ -23,11 +23,23 @@ describe Location do
       expect(location).to be_a Location
       expect(location.name).to eq "San Diego"
     end
+  end  
+
+  describe "#find_by_slug" do
+    it "should find cities by slug" do
+      location = Location.find_by_slug("seattle")
+      expect(location).to be_a Location
+      expect(location.name).to eq "Seattle"
+    end
   end
 
   describe "#physical?" do
     it "should be true for cities" do
       expect(Location.new("Chicago")).to be_physical
+    end    
+
+    it "should be true for cities" do
+      expect(Location.new("Seattle")).to be_physical
     end
 
     it "should be true for cities" do

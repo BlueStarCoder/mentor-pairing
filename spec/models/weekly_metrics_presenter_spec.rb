@@ -57,11 +57,13 @@ describe WeeklyMetricsPresenter do
       this_week = (Time.now.beginning_of_week(:sunday)...Time.now.end_of_week(:sunday))
       2.times { appointment_for(rand(this_week), city: 'Chicago') }
       1.times { appointment_for(rand(this_week), city: 'New York') }
+      1.times { appointment_for(rand(this_week), city: 'Seattle') }
 
       wm_presenter = WeeklyMetricsPresenter.new
       expect(wm_presenter.appointments_for('Chicago')).to eq(2)
       expect(wm_presenter.appointments_for('New York')).to eq(1)
       expect(wm_presenter.appointments_for('San Francisco')).to eq(0)
+      expect(wm_presenter.appointments_for('Seattle')).to eq(1)
     end
   end
 
