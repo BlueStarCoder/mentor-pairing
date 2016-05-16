@@ -76,7 +76,7 @@ class AvailabilitiesController < ApplicationController
 
   def build_json(availabilities)
     public_data = availabilities.map do |a|
-      list = [:start_time, :end_time, :timezone, :location].map {|attr| [attr, a[attr]]}
+      list = [:start_time, :end_time, :timezone, :location, :city].map {|attr| [attr, a[attr]]}
       hash = Hash[list]
       hash[:mentor_name] = a.mentor.name
       hash[:mentor_url] = a.mentor.twitter_handle

@@ -31,6 +31,22 @@ describe AvailabilitiesController do
     end
   end
 
+  describe '#index.json' do
+    let(:mentor) { FactoryGirl.create(:mentor) }
+    it 'should include city in json' do
+      Availability.create!({
+        :duration => 30,
+        'start_time' => DateTime.tomorrow,
+        :timezone => 'UTC',
+        :city => 'Seattle',
+        :mentor => mentor
+       })
+      get 'index', :format => :json
+      avails = JSON.parse(response.body)
+      expect(avails[0]['city']).to eq('Seattle')
+    end
+  end
+
   describe '#remaining' do
     it 'should assign physical cities' do
       get :remaining
