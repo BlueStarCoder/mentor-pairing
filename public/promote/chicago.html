@@ -121,7 +121,7 @@ function createRotater(length) {
 }
 
 function chicago(availability) {
-  return !availability.location.match(/NYC|York|SF|Fran/)
+  return availability.city.match(/Chicago/)
 }
 
 $.ajax({
