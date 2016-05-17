@@ -121,11 +121,11 @@ function createRotater(length) {
 }
 
 function seattle(availability) {
-  return !availability.location.match(/NYC|York|Chi|SD|Diego|SF|Fran/)
+  return availability.city.match(/Seattle/)
 }
 
 $.ajax({
-    url: "http://mentoring.devbootcamp.com/availabilities.json?callback=whatever",
+    url: "/availabilities.json?callback=whatever",
     jsonpCallback: "whatever",
     dataType: "jsonp"
 }).done(function(data){
