@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe AppointmentRequestsController do
+  describe "#new" do
+    render_views
+
+    it "warns you if someone else has requested this availability" do
+      mentee = FactoryGirl.create(:mentee, activated: true)
+      availability = FactoryGirl.create(:availability)
+
+      get :new, availability_id: availability.id
+      expect(response).not_to render_template(partial: "_existing_request")
+
+      availability.appointment_requests.create!(mentee: mentee)
+      get :new, availability_id: availability.id
+      expect(response).to render_template(partial: "_existing_request")
+    end
+  end
+
   describe "#create" do
     it "creates a record of the appointment request" do
       availability = FactoryGirl.create(:availability)
