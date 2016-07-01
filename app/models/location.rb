@@ -1,7 +1,7 @@
 class Location
 	attr_reader :name, :tz
 
-  CITY_NAMES = ["Chicago", "San Francisco", "New York", "Columbus", "San Diego", "Seattle"]
+  CITY_NAMES = ["Chicago", "San Francisco", "New York", "Columbus", "San Diego", "Seattle", "Austin"]
   LOCATION_NAMES = CITY_NAMES + ["Remote"]
 
   def initialize(name, tz=nil)
@@ -28,6 +28,7 @@ class Location
       Location.new("Columbus", "Eastern Time (US & Canada)"),
       Location.new("San Diego", "Pacific Time (US & Canada)"),
       Location.new("Seattle", "Pacific Time (US & Canada)"),
+      Location.new("Austin", "Central Time (US & Canada)"),
       Location.new("Remote")
     ]
   end
