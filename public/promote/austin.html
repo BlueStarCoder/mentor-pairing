@@ -1,0 +1,151 @@
+
+<html>
+<head>
+    <meta http-equiv="refresh" content="300">
+    <style TYPE="text/css">
+
+        body  {
+            background-color: black;
+            color: #999999;
+            font-size: 180%;
+            font-family: Raleway, san-serif;
+            background-image: url('http://mentoring.devbootcamp.com/assets/heart.png');
+            background-repeat: no-repeat;
+            background-position: 95% 95%%;
+        }
+
+        a   {text-decoration: none; color: yellow; }
+        li  {  }
+        h1  { font-size: 2.1em; line-height: 60%; margin: 40px 0 20px 0; padding: 0px; color: #ffffff; font-weight: 600; }
+        h2  { font-size: 1.5em; line-height: 1em; margin:0; color: #999999; font-family: Raleway, san-serif; font-weight: 200; text-transform: none;}
+        ul  { list-style-type: none; padding: 0px;margin: 0px; }
+
+        .bottom-of-header {margin-bottom: 80px;}
+        #availabilities {font-size: 3.5em; line-height: 1em; font-weight: 600; margin-left: 0px;}
+        #main { margin: 0 50px 0 50px; }
+        .highlight_text {color: #ffffff;}
+
+    </style>
+
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <script>
+        var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        function prettyDate(n) {
+            if (n == 1 || n == 21 || n == 31) {
+                return n + "st";
+            } else if (n == 2 || n == 22) {
+                return n + "nd";
+            } else if (n == 3 || n == 23) {
+                return n + "rd";
+            } else {
+                return n + "th";
+            }
+        }
+
+        function prettyTime(date) {
+            hours = date.getHours();
+            AM_PM = "AM";
+
+            if(hours > 12) {
+                hours = hours - 12;
+                AM_PM = "PM";
+            }
+
+            minutes = date.getMinutes();
+
+            if(minutes < 10){
+                minutes = "0" + minutes;
+            }
+
+            return  hours + ":" + minutes + " " + AM_PM;
+        }
+
+        function buildItem(availability, index) {
+            var date = new Date(availability.start_time);
+
+            var mentor_name_html = "<span class='highlight_text'>" + availability.mentor_name + "</span> <br>";
+
+            if (availability.mentor_url.charAt(0) == "@") {
+
+                return "<li id='a"+ index +"'>" + mentor_name_html + " aka " + availability.mentor_url +
+                        "<br> on " +
+                        weekdays[date.getDay()] +
+                        " the " +
+                        prettyDate(date.getDate()) +
+                        "<br>at " + prettyTime(date) + "</li>";
+
+            } else if (availability.mentor_url == "") {
+
+                return "<li id='a"+ index +"'>"+
+                        mentor_name_html +
+                        "<br> on " +
+                        weekdays[date.getDay()] +
+                        " the " +
+                        prettyDate(date.getDate()) +
+                        "<br>at " + prettyTime(date) + "</li>";
+
+            } else {
+
+                return "<li id='a"+ index +"'>"+
+                        mentor_name_html +
+                        " aka @" + availability.mentor_url + "<br> on " +
+                        weekdays[date.getDay()] +
+                        " the " +
+                        prettyDate(date.getDate()) +
+                        "<br>at " + prettyTime(date) + "</li>";
+            }
+
+        }
+
+
+
+        function createRotater(length) {
+            var count = 0;
+            return function() {
+                $("li").hide();
+                // alert("what")
+                // $("#a" + count).show();
+                $("#a" + count).toggle("drop");
+
+                count++;
+                if (count == length) {
+                    count = 0;
+                }
+            }
+        }
+
+        function austin(availability) {
+            return availability.city.match(/Austin/)
+        }
+
+        $.ajax({
+            url: "/availabilities.json?callback=whatever",
+            jsonpCallback: "whatever",
+            dataType: "jsonp"
+        }).done(function(data){
+            var count = 0;
+            $(data).each(function(index, availability) {
+                if (austin(availability)) {
+                    $("#availabilities").append(buildItem(availability, count++));
+                }
+            });
+
+            var rotater = createRotater(count);
+            rotater();
+            setInterval(rotater, 20000);
+        })
+    </script>
+</head>
+<body>
+<div id="main">
+    <h1>Here are some people ready to mentor you.</h1>
+    <h2 class="bottom-of-header">Sign up at <a href="http://mentoring.devbootcamp.com">mentoring.devbootcamp.com</a></h2>
+    <ul id="availabilities"></ul>
+</div>
+</body>

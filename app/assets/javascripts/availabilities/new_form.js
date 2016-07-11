@@ -14,7 +14,8 @@ var TimeZoneHelper = {
     'New York':"Eastern Time (US & Canada)",
     'Columbus':"Eastern Time (US & Canada)",
     'San Diego':"Pacific Time (US & Canada)",
-    'Seattle':"Pacific Time (US & Canada)"
+    'Seattle':"Pacific Time (US & Canada)",
+    'Austin':"Central Time (US & Canada)"
   }
 };
 
