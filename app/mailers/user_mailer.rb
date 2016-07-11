@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "chicago.lead.mentor@devbootcamp.com"
+  default from: "no-reply@devbootcamp.com"
   add_template_helper(ApplicationHelper)
 
   def user_activation(user)
@@ -41,7 +41,7 @@ class UserMailer < ActionMailer::Base
     @mentor = appointment.mentor
     @mentee = appointment.mentee
 
-    mail(:to => [@mentee.email,@mentor.email], :subject => "Mentoring appointment canceled")   
+    mail(:to => [@mentee.email,@mentor.email], :subject => "Mentoring appointment canceled")
   end
 
   def feedback_request(appointment, giver, receiver)

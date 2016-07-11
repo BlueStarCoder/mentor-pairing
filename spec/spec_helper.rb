@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'shoulda-matchers'
 
 require 'coveralls'
 Coveralls.wear!('rails')
@@ -25,6 +26,8 @@ end
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 RSpec.configure do |config|
+
+  config.include FormHelper, type: :feature
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
