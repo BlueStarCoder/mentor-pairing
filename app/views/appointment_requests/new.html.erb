@@ -1,7 +1,7 @@
 <h2>Sign up</h2>
 
 <div class="panel">
-  <%= render(partial: "existing_request") if @requests.any? %>
+  <%= render(partial: "existing_request") if @requests && @requests.any? %>
 	<p>With <%= link_to(@availability.mentor.name) %> on <%= display_availability(@availability) %></p>
 
 	<%= form_tag appointment_requests_path(:availability_id => @availability), id: "appointment_request" do %>
