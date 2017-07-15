@@ -6,6 +6,6 @@ $(function () {
 
   $("#availability").on("submit", function(event){
     var fields = [$("#first_name"), $("#last_name"), $("#email"), $("#availability_duration"), $("#availability_location")];
-    return toggleErrors(fields);
+    return checkStartTime() && toggleErrors(fields);
   });
 });
