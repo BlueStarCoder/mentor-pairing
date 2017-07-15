@@ -22,6 +22,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "shoulda-matchers", require: false
   gem "coveralls", :require => false
+  gem "rb-readline"
 end
 
 group :production do
