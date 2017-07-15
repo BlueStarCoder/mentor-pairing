@@ -36,12 +36,12 @@ AvailabilityRecurrence.prototype.formatAvailabilityTime = function() {
   var hours = this.availabilityTime().getHours();
   var minutes = this.availabilityTime().getMinutes();
   var ampm = hours >= 12 ? 'pm' : 'am';
+
   hours = hours % 12;
 
-  // the hour '0' should be '12'
   if (!hours) { hours = 12; };
   if (!minutes) { minutes = 0 };
-    
+
   return pad(hours) + ":" + pad(minutes) + " " + ampm;
 }
 
@@ -53,9 +53,9 @@ AvailabilityRecurrence.prototype.availabilityTime = function() {
 
   // Adjust hours to military time. Watch out for midnight
   var trueHour = hour;
-  if (ampm == 'PM' && hour > 12) { trueHour = String(Number(hour) + 12) }
+  if (ampm == 'PM' && hour < 12) { trueHour = String(Number(hour) + 12) }
   if (ampm == 'AM' && hour == 12) { trueHour = 0 }
-    
+
   return new Date(date + " " + trueHour + ":" + minute);
 }
 
@@ -63,7 +63,7 @@ AvailabilityRecurrence.prototype.numberOfRecurrences = function() {
   return parseInt(this.$el.find("#availability_recur_num option:selected").val());
 }
 
-// 60 seconds in a minute, 60 minutes in an hour, 
+// 60 seconds in a minute, 60 minutes in an hour,
 // 24 hours a day, 7 days a week in milliseconds
 AvailabilityRecurrence.ONE_WEEK = 60 * 60 * 24 * 7 * 1000;
 
